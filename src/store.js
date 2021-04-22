@@ -10,7 +10,7 @@ const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     cart: cartReducer,
-    urserLogin: userLoginReducer,
+    userLogin: userLoginReducer,
 })
 
 // pull data from localstorage in cartActions.
@@ -21,7 +21,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
 
 const initialState = {
-    cart: { cartItems: cartItemsFromStorage }
+    cart: { cartItems: cartItemsFromStorage },
     userLogin: { userInfo: userInfoFromStorage}
 }
 
