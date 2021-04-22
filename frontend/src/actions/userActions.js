@@ -20,18 +20,18 @@ export const login = (email, password) => async (dispatch) => {
         }
 // this sends our password and username and gets back a token
         const {data} = await axios.post(
-            '/api/user/login/',
+            '/api/users/login/',
             {'username':email, 'password': password},
             config
-            )
+        )
 
 //if the post request above is successful i dispatch and send payload to the reducer
-            dispatch({
-                type:USER_LOGIN_SUCCESS,
-                payload: data
-            })
+        dispatch({
+            type:USER_LOGIN_SUCCESS,
+            payload: data
+        })
 //set data in the local storage when you login in
-            localStorage.setItem('userInfo', JSON.stringify(data))
+        localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch(error) {
         dispatch({

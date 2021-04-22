@@ -1,12 +1,12 @@
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 
-import Header from '../../src/components/Header'
-import Footer from '../../src/components/Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-import HomeScreen from '../../src/screens/HomeScreen'
+import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
-import CartScreen from '../../src/screens/CartScreen'
+import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 
 
