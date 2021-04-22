@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Card, Button, Image, Form } from 'react-bootstrap'
 
-import { listProductDetails } from '../actions/productActions'
+import { listProductDetails } from '../../../src/actions/productActions'
 
-import Rating from '../components/Rating'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
+import Rating from '../../../src/components/Rating'
+import Loader from '../../../src/components/Loader'
+import Message from '../../../src/components/Message'
 
 
 function ProductScreen({ match, history }) {
