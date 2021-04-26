@@ -14,6 +14,13 @@ import {
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
 
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL,
+    USER_UPDATE_PROFILE_RESET,
+
+    
+
 } from '../constants/userConstants'
 import axios from 'axios'
 
@@ -54,13 +61,15 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+//---------------LOGOUT USER------------------//
+
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type:USER_LOGOUT })
 }
 
-
+//---------------REGISTER USER------------------//
 
 export const register = (name, email, password) => async (dispatch) => {
     try {
@@ -79,7 +88,6 @@ export const register = (name, email, password) => async (dispatch) => {
             {'name': name, 'email': email, 'password': password},
             config
         )
-
 //if the post request above is successful i dispatch and send payload to the reducer
         dispatch({
             type:USER_REGISTER_SUCCESS,
@@ -104,6 +112,9 @@ export const register = (name, email, password) => async (dispatch) => {
 }
 
 
+//--------------- USER DETAILS------------------//
+
+
 export const getUserDetails = (id) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -120,21 +131,64 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-
+        
         const {data} = await axios.get(
             `/api/users/${id}/`,
             config
         )
-
 //if the post request above is successful i dispatch and send payload to the reducer
         dispatch({
             type:USER_DETAILS_SUCCESS,
             payload: data
         })
-
     } catch(error) {
         dispatch({
             type:USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detailS
+            : error.message,
+         })
+    }
+}
+// takes in user object data (username, email, password)
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type:USER_UPDATE_PROFILE_REQUEST
+        })
+// NEED to be logged in
+        const {
+            userLogin: { userInfo }
+        } = getState()
+//taken in the token 
+        const config = {
+            headers: {
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+//user is the params of the userInfo data(email,username,password)
+        const {data} = await axios.put(
+            `/api/users/profile/update/`,
+            user,
+            config
+        )
+//if the post request above is successful i dispatch and send payload to the reducer
+        dispatch({
+            type:USER_UPDATE_PROFILE_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type:USER_LOGIN_SUCCESS,
+            payload: data
+        })
+
+        localStorage.setItem('userInfo', JSON.stringify(data))
+        
+    } catch(error) {
+        dispatch({
+            type:USER_UPDATE_PROFILE_FAIL,
             payload: error.response && error.response.data.detail
             ? error.response.data.detailS
             : error.message,
