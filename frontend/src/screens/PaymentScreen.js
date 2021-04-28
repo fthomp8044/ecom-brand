@@ -12,7 +12,11 @@ function PaymentScreen({history}) {
 
     const dispatch = useDispatch()
 
+<<<<<<< HEAD
     const [paymentMethod, setPaymentMethod] =useState('PayPal')
+=======
+    const [paymentMethod, setPaymentMethod] = useState('PayPal')
+>>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
 
     if(!shippingAddress.address){
         history.push('/shipping')
@@ -21,7 +25,11 @@ function PaymentScreen({history}) {
     const submitHandler = (e) =>{
         e.preventDefault()
         dispatch(savePaymentMethod(paymentMethod))
+<<<<<<< HEAD
         history.push('/placeholder')
+=======
+        history.push('/placeorder')
+>>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
     }
 
     return (
@@ -53,4 +61,8 @@ function PaymentScreen({history}) {
     )
 }
 
+<<<<<<< HEAD
 export default PaymentScreen
+=======
+export default PaymentScreen
+>>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f

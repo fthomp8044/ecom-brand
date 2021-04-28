@@ -112,4 +112,8 @@ function RegisterScreen({ location, history }) {
     )
 }
 
+<<<<<<< HEAD
 export default RegisterScreen
+=======
+export default RegisterScreen
+>>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
