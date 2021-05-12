@@ -130,8 +130,4 @@ function ProfileScreen({ history }) {
     )
 }
 
-<<<<<<< HEAD
 export default ProfileScreen
-=======
-export default ProfileScreen
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f

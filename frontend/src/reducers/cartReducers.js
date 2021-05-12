@@ -1,12 +1,6 @@
 import { CART_ADD_ITEM, 
         CART_REMOVE_ITEM, 
         CART_SAVE_SHIPPING_ADDRESS,
-<<<<<<< HEAD
-
-=======
-        
-        
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
         CART_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants'
 
@@ -24,10 +18,6 @@ export const cartReducer = (state = {cartItems: [], shippingAddress: {} }, actio
                     cartItems: state.cartItems.map(x => 
                         x.product === existItem.product ? item : x)
                 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
             }else{
                 return{
                     ...state,

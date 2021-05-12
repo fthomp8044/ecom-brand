@@ -53,8 +53,4 @@ function CheckoutSteps({step1, step2, step3, step4}) {
     )
 }
 
-<<<<<<< HEAD
 export default CheckoutSteps
-=======
-export default CheckoutSteps
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f

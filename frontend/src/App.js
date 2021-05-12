@@ -10,11 +10,10 @@ import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
-<<<<<<< HEAD
-=======
+
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
+
 
 
 
@@ -30,10 +29,7 @@ function App() {
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payment" component={PaymentScreen} />
-<<<<<<< HEAD
-=======
           <Route path="/placeorder" component={PlaceOrderScreen} />
->>>>>>> 8ed703b5daa57c2a27b843dc28b12cc0fab7857f
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
         </Container>
