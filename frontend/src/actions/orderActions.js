@@ -76,8 +76,8 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             }
         }
 //user is the params of the userInfo data(email,username,password)
-        const {data} = await axios.post(
-            `/api/orders/${id}`,
+        const {data} = await axios.get(
+            `/api/orders/${id}/`,
             config
         )
 //if the post request above is successful i dispatch and send payload to the reducer

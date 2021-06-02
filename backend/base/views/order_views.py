@@ -69,7 +69,7 @@ def getOrderById(request, pk):
     try:
         order = Order.objects.get(_id=pk)
         # if the user is authenticated user or staff memember to access order
-        if order.is_staff or order.user == user:
+        if user.is_staff or order.user == user:
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data)
         else:
