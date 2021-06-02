@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer, productDetailsReducer } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
-
+import { orderCreateReducer } from './reducers/orderReducers'
 
 // combineRuducers combine all reducers so we can add it to the store
 const reducer = combineReducers({
@@ -15,6 +15,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    orderCreate: orderCreateReducer,
 })
 
 // pull data from localstorage in cartActions.
