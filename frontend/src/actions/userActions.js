@@ -20,7 +20,10 @@ import {
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_RESET,
 
-    
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+    USER_LIST_RESET,
 
 } from '../constants/userConstants'
 import axios from 'axios'
@@ -57,7 +60,7 @@ export const login = (email, password) => async (dispatch) => {
         dispatch({
             type:USER_LOGIN_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detailS
+            ? error.response.data.detail
             : error.message,
          })
     }
@@ -71,6 +74,7 @@ export const logout = () => (dispatch) => {
     dispatch({ type:USER_LOGOUT })
     dispatch({type: USER_DETAILS_RESET})
     dispatch({type: ORDER_LIST_MY_RESET})
+    dispatch({type: USER_LIST_RESET})
 }
 
 //---------------REGISTER USER------------------//
@@ -109,7 +113,7 @@ export const register = (name, email, password) => async (dispatch) => {
         dispatch({
             type:USER_REGISTER_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detailS
+            ? error.response.data.detail
             : error.message,
          })
     }
@@ -149,7 +153,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         dispatch({
             type:USER_DETAILS_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detailS
+            ? error.response.data.detail
             : error.message,
          })
     }
@@ -194,8 +198,49 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         dispatch({
             type:USER_UPDATE_PROFILE_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detailS
+            ? error.response.data.detail
             : error.message,
          })
     }
 }
+
+// ---------------------Admin List User-------------------------//
+
+export const listUsers = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type:USER_LIST_REQUEST
+        })
+// NEED to be logged in
+        const {
+            userLogin: { userInfo }
+        } = getState()
+//taken in the token 
+        const config = {
+            headers: {
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+//user is the params of the userInfo data(email,username,password)
+        const {data} = await axios.get(
+            `/api/users/`,
+            config
+        )
+//if the post request above is successful i dispatch and send payload to the reducer
+        dispatch({
+            type:USER_LIST_SUCCESS,
+            payload: data
+        })
+
+
+    } catch(error) {
+        dispatch({
+            type:USER_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+         })
+    }
+}
+
