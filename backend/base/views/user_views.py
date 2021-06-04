@@ -83,6 +83,32 @@ def getUsers(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+# assign date from backend to frontend
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+
+    user.save()
+    
+# serialize the new updated data to the user
+    serializer = UserSerializerWithToken(user, many=False)
+
+    return Response(serializer.data)
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
