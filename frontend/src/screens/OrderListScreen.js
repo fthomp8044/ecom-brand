@@ -29,7 +29,7 @@ function OrderListScreen({ history }) {
 
     return (
         <div>
-            <h1>Users</h1>
+            <h1>Orders</h1>
             {loading
             ? (<Loader />)
             : error 
