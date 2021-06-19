@@ -84,7 +84,7 @@ function ShippingScreen({ history }) {
                 </Form.Group>
 
                 <Button type='submit' variant='primary'>
-                    Continuye
+                    Continue
                 </Button>
 
             </Form>
