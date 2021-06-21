@@ -10,7 +10,7 @@ from base.models import Product, Review
 
 from base.serializer import ProductSerializer
 
-from rest_framework import status
+from rest_framework import  status
 
 @api_view(['GET'])
 def getProducts(request):
@@ -43,22 +43,22 @@ def getProducts(request):
     return Response({'products': serializer.data, 'page':page, 'pages':paginator.num_pages})
 
 
+@api_view(['GET'])
+def getTopProducts(request):
+    # get the products and filter it by the rating thats greater than 4. e.g gt means greater than. e is equal
+    # [0:5] gives you the top 5 products that were rated high
+    products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
 
-# @api_view(['GET'])
-# def getProduct(request, pk):
-#     product = None
-#     for x in products:
-#         if x['_id'] == pk:
-#             product = x
-#             break
 
-#     return Response(product)
 
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
@@ -75,6 +75,7 @@ def createProduct(request):
     )
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
+
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
@@ -95,12 +96,14 @@ def updateProduct(request, pk):
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()
     return Response('Product wad deleted.')
+
 
 
 @api_view(['POST'])
@@ -113,6 +116,7 @@ def uploadImage(request):
     product.image = request.FILES.get('image')
     product.save()
     return Response('Image was uploaded')
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
